@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attributes and nth child selectors</title>
+    <style>
+        body {
+            background-color: black;
+        }
+
+        .container {
+            display: block;
+            margin: auto;
+            width: 200px;
+        }
+
+        input {
+            display: block;
+        }
+
+        input[type="text"] {
+            border: 2px solid red;
+            height: 200px;
+            width: 200px;
+            font-size: 30px;
+            margin: 20px;
+        }
+
+        a[target] {
+            font-size: 30px;
+            text-decoration: none;
+            color: rgb(255, 193, 255);
+        }
+
+        a[target=_self] {
+            font-size: 30px;
+            text-decoration: none;
+            color: palegreen;
+        }
+
+        a[target]:hover {
+            cursor: pointer;
+            text-decoration: line-through;
+        }
+
+        /*        
+        li:nth-child(2n){
+            color: blue;
+        }
+        li:nth-child(3n){
+            color: red;
+        }
+        li:nth-child(4n){
+            color: yellow;
+        }
+        li:nth-child(5n){
+            color: paleturquoise;
+        } */
+        li:nth-child(odd) {
+            color: yellow;
+        }
+
+        li:nth-child(even) {
+            color: paleturquoise;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1><a href="https://www.google.co.in/" target="_blank">Go to google</a></h1>
+        <h1><a href="https://www.Facebook.com/" target="_self">Go to Facebook</a></h1>
+        <form action="" class="form-control">
+            <input type="text" placeholder="Enter your name:">
+            <input type="password" placeholder="enter your pass:" id="">
+            <input type="submit" value="Submit">
+        </form>
+        <ul>
+            <li class="item" id="item-1">Item1</li>
+            <li class="item" id="item-2">Item2</li>
+            <li class="item" id="item-3">Item3</li>
+            <li class="item" id="item-4">Item4</li>
+            <li class="item" id="item-5">item5</li>
+            <li class="item" id="item-1">Item1</li>
+            <li class="item" id="item-2">Item2</li>
+            <li class="item" id="item-3">Item3</li>
+            <li class="item" id="item-4">Item4</li>
+            <li class="item" id="item-5">item5</li>
+            <li class="item" id="item-1">Item1</li>
+            <li class="item" id="item-2">Item2</li>
+            <li class="item" id="item-3">Item3</li>
+            <li class="item" id="item-4">Item4</li>
+            <li class="item" id="item-5">item5</li>
+            <li class="item" id="item-1">Item1</li>
+            <li class="item" id="item-2">Item2</li>
+            <li class="item" id="item-3">Item3</li>
+            <li class="item" id="item-4">Item4</li>
+            <li class="item" id="item-5">item5</li>
+            <li class="item" id="item-1">Item1</li>
+            <li class="item" id="item-2">Item2</li>
+            <li class="item" id="item-3">Item3</li>
+            <li class="item" id="item-4">Item4</li>
+            <li class="item" id="item-5">item5</li>
+            <li class="item" id="item-1">Item1</li>
+            <li class="item" id="item-2">Item2</li>
+            <li class="item" id="item-3">Item3</li>
+            <li class="item" id="item-4">Item4</li>
+            <li class="item" id="item-5">item5</li>
+            <li class="item" id="item-1">Item1</li>
+            <li class="item" id="item-2">Item2</li>
+            <li class="item" id="item-3">Item3</li>
+            <li class="item" id="item-4">Item4</li>
+            <li class="item" id="item-5">item5</li>
+            <li class="item" id="item-1">Item1</li>
+            <li class="item" id="item-2">Item2</li>
+            <li class="item" id="item-3">Item3</li>
+            <li class="item" id="item-4">Item4</li>
+            <li class="item" id="item-5">item5</li>
+
+        </ul>
+    </div>
+</body>
+
+</html>

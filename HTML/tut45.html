@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Media Querries</title>
+    <style>
+        .container {
+            display: grid;
+            grid-gap: 1rem;
+            grid-template-areas:
+                'navbar navbar navbar navbar '
+                'section section section  aside '
+                'footer footer footer footer'
+            ;
+        }
+
+        nav {
+            grid-area: navbar;
+
+        }
+
+        section {
+            grid-area: section;
+        }
+
+        aside {
+            grid-area: aside;
+        }
+
+        @media only screen and (max-width:400px) {
+            body {
+                background-color: red;
+            }
+            .container {
+            grid-template-areas:
+                'navbar navbar'
+                'section section'
+                'aside aside'
+                'footer footer'
+            ;
+        }
+        aside{
+            display: none;
+        }
+        footer{
+            display: none;
+        }
+        span{
+            display: block;
+            text-align: center;
+        }
+        }
+
+        @media only screen and (max-width:800px) and (min-width:400px) {
+            body {
+                background-color: green;
+            }
+            .container {
+            grid-template-areas:
+                'navbar navbar navbar navbar '
+                'section section section section '
+                'aside aside aside aside '
+                'footer footer footer footer'
+            ;
+        }
+        aside{
+            display: none;
+        }
+       
+        }
+
+        @media (max-width:1200px) and (min-width:800px) {
+            body {
+                background-color: blue;
+
+            }
+            .container {
+            grid-template-areas:
+                'navbar navbar navbar navbar '
+                'section section section section '
+                'aside aside aside aside '
+                'footer footer footer footer'
+            ;
+        }
+        
+        }
+
+        @media (min-width:1200px) {
+            body {
+                background-color: yellow;
+            }
+        }
+
+        .bdr {
+            border: 2px solid black;
+            padding: 23px;
+            background-color: wheat;
+            /* text-align: center; */
+            /* display: block; */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="bdr" style="text-align: center;">
+            <span>Home</span>
+            <span>About</span>
+            <span>Servies</span>
+            <span>Contact</span>
+            </nav>
+        <section class="bdr">
+            <h2>Learn CSS in Hindi</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus iste dolor quisquam nemo minima, commodi magnam sed quae praesentium laborum nulla incidunt fugit fuga illo. Culpa numquam unde placeat fugiat perferendis accusantium tempora eveniet vero ad et sapiente magni error iusto quasi voluptas ipsam dolores ducimus, nam sunt pariatur repudiandae. Amet, maiores doloribus! Commodi iste error voluptatibus ipsum doloremque sequi corporis quia porro laudantium amet quasi eligendi debitis aliquid quo ullam odio earum ipsam, necessitatibus similique architecto impedit! Ex omnis eaque quis aliquid mollitia consequatur dolorem officiis excepturi, assumenda molestias non sit architecto blanditiis distinctio nemo, quae adipisci voluptates rem dolore vero pariatur in tempora. Porro accusantium illum tempora, voluptatibus explicabo corrupti beatae sed dolores veniam exercitationem! Similique voluptatum magni qui quas?</p>
+        </section>
+        <aside class="bdr">
+            <h1>More About Us</h1>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta modi, dignissimos officia ad explicabo, nostrum enim, saepe odio incidunt repellendus excepturi non earum?</p>
+        </aside>
+    </div>
+    <footer style="text-align: center;" class="bdr">Copyright content &copy </footer>
+</body>
+
+</html>

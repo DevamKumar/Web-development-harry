@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key frames and animaations</title>
+    <style>
+        .container {
+            background-color: yellowgreen;
+        }
+        .box {
+            background-color: green;
+            height: 250px;
+            width: 250px;
+            position: relative;
+            animation-name: box_animation2;
+            animation-duration: 3s;
+            animation-iteration-count: 3;
+            animation-fill-mode: both;
+            animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+            animation-delay: 1000ms;
+            animation: devam 5s ease-out 4 forwards;
+        }
+        @keyframes devam {
+            20% {
+                top: 0;
+                left: 0;
+            }
+            40% {
+                top: 250px;
+                left: 0;
+            }
+            60% {
+                top: 250px;
+                left: 250px;
+            }
+            80% {
+                top: 0px;
+                left: 250px;
+            }
+            100%{
+                top: 0;
+                left: 0;
+            }
+        }
+        @keyframes box_animation {
+            from {
+                width: 100px;
+            }
+            to {
+                width: 1250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            this is a box
+        </div>
+    </div>
+</body>
+</html>

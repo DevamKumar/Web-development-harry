@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css selector</title>
+    <style>
+        /* element selector */
+        p{
+            border: 2px solid grey;
+        }
+        /* grouping selector */
+        footer,span,div{
+            background-color: pink !important;
+            color: green !important;
+        }
+        /* id selector */
+        #blueElement{
+            color: blue;
+        }
+
+        /* class selector */
+        .purpleClass{
+            color: purple;
+            background-color: red;
+        }
+        /* id selector */
+        #elementSelector{
+            color: red;
+        }
+        /* body back ground color  */
+        body{
+            color: white;
+            background-color: rgb(0, 0, 0);
+        }
+       
+    </style>
+</head>
+<body>
+    
+    <header><strong>This is header</strong></header>
+    <h3>element selector</h3>
+    <p id="elementSelector">this is a normal paragraph to study css selectors</p>
+    <h3>id selector</h3>
+    <p id="blueElement">this is a normal paragraph to study css selectors</p>
+    <h3>class selector</h3>
+    <p class="purpleClass">this is a normal paragraph to study css selectors</p>
+    <h3>css grouping selector</h3>
+    <div>
+        <p>this is a normal paragraph to study css selectors</p>
+        <span>this is a normal span to understand grouping in selectors</span>
+        <p style="color: orangered">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores error omnis voluptatum nobis blanditiis ea laudantium ratione libero pariatur necessitatibus.</p>
+    </div>
+    <br>
+    <footer>this is a footer</footer>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css avriables/ custom properties</title>
+    <style>
+        :root {
+            --primary-color: blue;
+            --danger-color: red;
+            --maxh: 700px;
+        }
+
+        .box {
+            height: 200px;
+            width: 200px;
+            background-color: var(--primary-color);
+            margin: 2px 9px;
+            border: 2px solid var(--danger-color);
+            box-shadow: 3px 3px var(--danger-color);
+        }
+
+        .container {
+            background-color: var(--box-color);
+            max-width: var(--maxh);
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+</body>
+
+</html>

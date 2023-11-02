@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+</head>
+
+<body>
+    <h2>This is HTML forms tutorial</h2>
+    <form action="backend.php">
+        <label for="name">Name:</label>
+        <div>
+            <input type="text" name="myName" id="name">
+        </div>
+        <br>
+        <label for="uid">UID:</label>
+        <div>
+            <input type="number" name="myClass" id="uid">
+        </div>
+        <br>
+        <label for="email">Email:</label>
+        <div>
+            <input type="email" name="myEmail" id="email">
+        </div>
+        <br>
+        <label for="dob">DOB:</label>
+        <div>
+            <input type="date" name="myDOB" id="dob">
+        </div>
+        <br>
+        <label for="text">Write about your self:</label>
+        <div>
+            <textarea name="myText" id="text" cols="90" rows="10"></textarea>
+        </div>
+        <br>
+        <label for="car">Select your car:</label>
+        <div>
+            <select name="myCar" id="car">
+                <option value="tata">Indica</option>
+                <option value="maruti">Fronze</option>
+                <option value="Volvo" selected>XC60</option>
+                <option value="Kia">Seltos</option>
+                <option value="toyota">Inova</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            Are you ready: YES<input type="radio" name="myEligiblity"> NO<input type="radio" name="myEligiblity">
+        </div>
+        <br>
+        <label for="submit">submit or not:</label>
+        <div>
+            <input type="checkbox" name="mySubmition" id="submit">
+        </div>
+        <br>
+        <div>
+            <input type="submit" value="Submit form"> <input type="reset" value="Delete form">
+        </div>
+    </form>
+
+</body>
+
+</html>

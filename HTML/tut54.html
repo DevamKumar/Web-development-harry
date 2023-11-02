@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>making site somewhat more interactive and informative</title>
+</head>
+
+<body>
+    <div class="comntainer">
+        This is a club's landing page.
+    </div>
+    <script>
+        // console.clear()
+        // alert('this alert will load the rest of the page');
+        // let a = alert('this is alert');
+        // console.log(a);
+        // console.log("devam here")
+        // let name = prompt('enter your name ?',"")
+        // if (name !== null) {
+        //     console.log(name + ` is your name!`)
+        // } else {
+        //     throw new Error(console.log(`enter your name!`))
+        // }
+        // let deletePost = confirm("You want to delete it!");
+        // if (deletePost) {
+        //     console.log("Your post has been deleted successfully!")
+
+        // } else {
+        //     console.log("Your post has not been deleted!");
+        // }
+        // console.log(deletePost);
+
+        // while (ageConfirm <= 17) {
+        //     ageConfirm = prompt("Please enter your age again: ");
+        // }
+        let ageConfirm = prompt("Only persons above 18 can enter the club! Enter your Age:");
+        if ((ageConfirm >= 18)) {
+            document.write("<h2 style='color:#3498db;'>Welcome " + name + "</h2>");
+        } else {
+            document.write('<p><strong>Sorry you are too young to be in a club!</strong></p>');
+        }
+    </script>
+
+
+
+</body>
+
+</html>

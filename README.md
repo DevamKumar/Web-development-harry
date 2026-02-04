@@ -17,7 +17,7 @@ CLI Initialization (dxp_sdk init): You run this once in your terminal.
 It securely saves your Access Token and Solution IDs to a hidden file on
 your machine (\~/.dxp_sdk/session.json).
 
-Auto-Loading: When you import the library (import dxp_sdk), it
+Auto-Loading: When you import the library in Python (import dxp_sdk), it
 automatically finds that file, loads your credentials, and configures
 the connection silently.
 
@@ -36,7 +36,7 @@ passwords.
 ### Install via Distribution File or Public Repository
 
 ``` bash
-pip install ./path/to/file/dxp_sdk-0.1.0.whl
+pip3 install ./path/to/file/dxp_sdk_0.1.0.whl --force-reinstall
 ```
 
 ------------------------------------------------------------------------
@@ -55,9 +55,8 @@ dxp_sdk init
 You will be prompted to enter your credentials.
 
 Access Token: Paste your raw token string OR the path to a text file
-containing the token (e.g., /Users/me/token.txt).\
-Solution ID: Your specific DXP SolutionID.\
-Company ID: Your specific DXP CompanyID.\
+containing the token (e.g., /Users/me/token.txt). Solution ID: Your
+specific DXP SolutionID. Company ID: Your specific DXP CompanyID.
 Solution Name: Your specific DXP Solution Name.
 
 ## 2. Verify Status
@@ -68,7 +67,6 @@ dxp_sdk status
 
 Output:
 
-    Plaintext
     ✅Active Session: {CompanyID} | {SolutionName}
 
 ------------------------------------------------------------------------
@@ -100,37 +98,7 @@ them.
 
 ------------------------------------------------------------------------
 
-# 2. Document Operation
-
-## Document.create(file_path,assetSubType)
-
-Uploads a physical file to DXP.
-
-Behavior: This is designed specifically to trigger ingest workflows in
-the DXP backend.
-
-Parameters:
-
--   file_path (str): The absolute path to the file on your local
-    machine.
--   assetSubType(str): The subtype of the asset which will always be
-    "unclassified".
-
-``` python
-from dxp_sdk import Document
-
-doc = Document.create(
-    file_path="/path/of/the/file.pdf",
-    assetSubType="Unclassified"
-)
-
-print(f"Created Document GUID: {doc.assetGUID}")
-print(doc)
-```
-
-------------------------------------------------------------------------
-
-# 3. Case Operations
+# 2. Case Operations
 
 ## Case.create(metadata, assetSubType)
 
@@ -146,9 +114,10 @@ Parameters:
 ``` python
 from dxp_sdk import Case
 
+# Create a new Case
 new_case = Case.create(
     name="SDK_Example_case_03feb_002",
-    assetSubType="Case",
+    assetSubType="Case"
 )
 
 print(f"Case Created: {case_res.assetGUID}")
@@ -157,7 +126,39 @@ print(case_res)
 
 ------------------------------------------------------------------------
 
-# 4. Asset Operations
+# 3. Asset Operations
+
+These functions work for both uploaded Documents (Assets) and Cases.
+
+------------------------------------------------------------------------
+
+## Asset.create(file_path,assetSubType)
+
+Uploads a physical file to DXP.
+
+Behavior: This is designed specifically to trigger ingest workflows in
+the DXP backend.
+
+Parameters:
+
+-   file_path (str): The absolute path to the file on your local
+    machine.
+-   assetSubType(str): The subtype of the asset(depends on solution).
+
+``` python
+from dxp_sdk import Document
+
+# Uploads the file and triggers the "Unclassified" workflow
+doc = Asset.create(
+    file_path="/path/of/the/file.pdf",
+    assetSubType="Unclassified"
+)
+
+print(f"Created Document GUID: {doc.assetGUID}")
+print(doc)
+```
+
+------------------------------------------------------------------------
 
 ## Asset.get(assetGUID)
 
@@ -165,11 +166,12 @@ Retrieves full information and metadata for a specific Asset or Case.
 
 Parameters:
 
--   asset_guid (str): The unique ID of the document or case.
+-   assetGUID (str): The unique ID of the document or case.
 
 ``` python
 from dxp_sdk import Asset
 
+# Get info about a Document or a Case
 asset_detail = Asset.get(
     assetGUID = "{assetGUID}"
 )
@@ -194,10 +196,12 @@ Parameters:
 ``` python
 from dxp_sdk import Asset
 
+# Update metadata for a Document OR a Case
 update_res = Asset.update(
-    assetGUID = "663e2f4f-7933-4cf2-8a9b-071212886d8e",
+    assetGUID = "{assetGUID}",
+    # example assetGUID = "b2d364ad-e73c-4645-xxxx-0f6fs35e5b2d"
     metadata={
-        "Applicant_First_Name": "SDK_Test_Name"
+        "Applicant_First_Name": "JOHN DOE"
     }
 )
 
@@ -222,6 +226,7 @@ Parameters:
 ``` python
 from dxp_sdk import Asset
 
+# Find all assets that match specific criteria
 results = Asset.search(
     assetSubType="Driving_License"
 )
@@ -245,8 +250,11 @@ Parameters:
 ``` python
 from dxp_sdk import Asset
 
+# Download the file to your downloads folder
 asset_download = Asset.download(
-    assetGUID="b2d364ad-e73c-4645-b7e7-0f6f037e5b2d",
+    assetGUID = "{assetGUID}",
+    # example assetGUID="b2d364ad-e73c-4645-xxxx-0f6f037e5b2d",
+    # local system path to save the document
     save_path="/path/to/save/asset/document.pdf"
 )
 
@@ -275,52 +283,67 @@ print(asset_download)
 
 # Project Structure
 
-    dxp_sdk/
-    ├── pyproject.toml
-    ├── requirements.txt
-    ├── README.md
+    dxp_sdk/                    # Root Directory
+    ├── pyproject.toml          # Build configuration & Dependencies
+    ├── requirements.txt        # Python dependencies list
+    ├── README.md               # This documentation
     │
-    └── dxp_sdk/
-        ├── __init__.py
-        ├── authorization/
-        │   ├── auth.py
-        │   └── session.py
-        ├── cli/
-        │   └── cli.py
-        ├── client/
-        │   └── dxp_client.py
-        ├── config/
-        │   └── config.py
-        ├── http/
-        │   └── http_client.py
-        ├── models/
-        │   ├── dxp_object.py
-        │   └── request.py
-        └── resources/
-            ├── base.py
-            ├── asset.py
-            ├── case.py
-            └── document.py
+    └── dxp_sdk/                # Source Code Package
+        ├── __init__.py         # Handles "Auto-Load" logic (Magic Import)
+        │
+        ├── authorization/      # Authentication Logic
+        │   ├── auth.py         # Logic for 'init()' interactive flow
+        │   └── session.py      # Handles reading/writing JSON credentials to disk
+        │
+        ├── cli/                # Command Line Interface
+        │   └── cli.py          # Entry point for the 'dxp_sdk' terminal command
+        │
+        ├── client/             # High-Level Client
+        │   └── dxp_client.py   # Orchestrates SDK configuration & startup
+        │
+        ├── config/             # Configuration Management
+        │   └── config.py       # Singleton class storing settings in memory
+        │
+        ├── http/               # Low-Level Networking
+        │   └── http_client.py  # Wrapper for 'requests' (POST)
+        │
+        ├── models/             # Data Models & Schemas
+        │   ├── dxp_object.py   # Base class for DXP objects
+        │   └── request.py      # Request payload definitions
+        │
+        └── resources/          # API Resource Wrappers (Business Logic)
+            ├── base.py         # Shared logic for all resources (CRUD bases)
+            ├── asset.py        # Operations for Assets
+            ├── case.py         # Operations for Cases
 
 ------------------------------------------------------------------------
 
 # ❓ Troubleshooting
 
-Q: ModuleNotFoundError: No module named 'dxp_sdk'\
+### Q: ModuleNotFoundError: No module named 'dxp_sdk'
+
 Fix: Ensure you are running the script with the same Python version you
-installed the library in.
+installed the library in. Try running this to verify.
 
 ``` bash
 python3 -m dxp_sdk.cli init
 ```
 
-Q: dxp_sdk: command not found\
+------------------------------------------------------------------------
+
+### Q: dxp_sdk: command not found
+
 Fix: Your Python bin folder is not in your system PATH.
 
+Workaround: You can always run the CLI using Python directly:
+
 ``` bash
 python3 -m dxp_sdk.cli init
 ```
 
-Q: Authorization Errors (401/403)\
+------------------------------------------------------------------------
+
+### Q: Authorization Errors (401/403)
+
 Fix: Your token might have expired. Simply run dxp_sdk init again to
-paste a new token.
+paste a new token. The SDK will overwrite the old session file.

@@ -81,20 +81,14 @@ them.
 
 # 1. Setup & Configuration (dxp_sdk)
 
-  --------------------------------------------------------------------------------------
-  Function                 Usage                           Description
-  ------------------------ ------------------------------- -----------------------------
-  dxp_sdk.init()           dxp_sdk.init()                  Interactive. Run the CLI
-                                                           wizard to set up credentials.
-                                                           (Same as running dxp_sdk init
-                                                           in the terminal).
 
-  dxp_sdk.configure(...)   configure(access_token="...")   Manual. Manually sets
-                                                           credentials in code (bypasses
-                                                           the saved session file).
-                                                           Useful for serverless/CI
-                                                           environments.
-  --------------------------------------------------------------------------------------
++------------------------+-------------------------------+---------------------------------------------------------------------------------------------------------------------+
+|        Function        |             Usage             |                                                     Description                                                     |
++------------------------+-------------------------------+---------------------------------------------------------------------------------------------------------------------+
+| dxp_sdk.init()         | dxp_sdk.init()                | Interactive. Run the CLI wizard to set up credentials.(Same as running dxp_sdk init in the terminal).               |
+| dxp_sdk.configure(...) | configure(access_token="...") | Manual. Manually sets credentials in code (bypasses the saved session file). Useful for serverless/CI environments. |
++------------------------+-------------------------------+---------------------------------------------------------------------------------------------------------------------+
+
 
 ------------------------------------------------------------------------
 

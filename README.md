@@ -1,387 +1,326 @@
-**Iron Mountain DXP SDK (dxp\_sdk)**
-====================================
+# Iron Mountain DXP SDK (dxp_sdk)
 
-The **DXP SDK** is a Python library designed to simplify interactions with the Iron Mountain Insight (DXP) API. It features a **"Login Once, Run Anywhere"** architecture, allowing developers to focus on business logic (uploading documents, managing assets) without worrying about authentication headers in every script.
+The DXP SDK is a Python library designed to simplify interactions with
+the Iron Mountain Insight (DXP) API. It features a "Login Once, Run
+Anywhere" architecture, allowing developers to focus on business logic
+(uploading documents, managing assets) without worrying about
+authentication headers in every script.
 
-**Architecture**
-----------------
+------------------------------------------------------------------------
 
-This SDK uses a **Persistent Session** model similar to the AWS CLI or Google Cloud SDK.
+## Architecture
 
-1.  **CLI Initialization (dxp\_sdk init)**: You run this _once_ in your terminal. It securely saves your Access Token and Solution IDs to a hidden file on your machine (~/.dxp\_sdk/session.json).
-    
-2.  **Auto-Loading**: When you import the library in Python (import dxp\_sdk), it automatically finds that file, loads your credentials, and configures the connection silently.
-    
-3.  **Result**: Your scripts remain clean, secure, and devoid of hardcoded passwords.
-    
+This SDK uses a Persistent Session model similar to the AWS CLI or
+Google Cloud SDK.
 
-**Installation**
-----------------
+CLI Initialization (dxp_sdk init): You run this once in your terminal.
+It securely saves your Access Token and Solution IDs to a hidden file on
+your machine (\~/.dxp_sdk/session.json).
 
-### **Prerequisites**
+Auto-Loading: When you import the library (import dxp_sdk), it
+automatically finds that file, loads your credentials, and configures
+the connection silently.
 
-*   Python 3.8+
-    
-*   pip package manager
-    
+Result: Your scripts remain clean, secure, and devoid of hardcoded
+passwords.
 
-### **Install via Distribution File or Public Repository** 
+------------------------------------------------------------------------
 
-pip3 install ./path/to/file/dxp\_sdk\_0.1.0.whl --force-reinstall
+## Installation
 
-**Setup (Do this ONCE)**
-------------------------
+### Prerequisites
 
-Before running any Python scripts, you must initialize your environment using the CLI tool included with the SDK.
+-   Python 3.8+
+-   pip package manager
 
-### **1\. Initialize Session**
+### Install via Distribution File or Public Repository
 
-Open your terminal and run:
+``` bash
+pip install ./path/to/file/dxp_sdk-0.1.0.whl
+```
 
-dxp\_sdk init
+------------------------------------------------------------------------
+
+# Setup (Do this ONCE)
+
+Before running any Python scripts, you must initialize your environment
+using the CLI tool included with the SDK.
+
+## 1. Initialize Session
+
+``` bash
+dxp_sdk init
+```
 
 You will be prompted to enter your credentials.
 
-*   **Access Token**: Paste your raw token string OR the path to a text file containing the token (e.g., /Users/me/token.txt).
-    
-*   **Solution ID**: Your specific DXP SolutionID.
-    
-*   **Company ID:** Your specific DXP CompanyID.
-    
-*   **Solution Name**: Your specific DXP Solution Name.
-    
+Access Token: Paste your raw token string OR the path to a text file
+containing the token (e.g., /Users/me/token.txt).\
+Solution ID: Your specific DXP SolutionID.\
+Company ID: Your specific DXP CompanyID.\
+Solution Name: Your specific DXP Solution Name.
 
-### **2\. Verify Status**
+## 2. Verify Status
 
-To confirm you are connected:
+``` bash
+dxp_sdk status
+```
 
-dxp\_sdk status
+Output:
 
-_Output:_
+    Plaintext
+    ✅Active Session: {CompanyID} | {SolutionName}
 
-✅Active Session: {CompanyID} | {SolutionName}
+------------------------------------------------------------------------
 
-**API Reference Guide**
-=======================
+# API Reference Guide
 
-This SDK provides a simple, object-oriented interface to interact with DXP Resources. Below is a list of all available functions and how to use them.
+This SDK provides a simple, object-oriented interface to interact with
+DXP Resources. Below is a list of all available functions and how to use
+them.
 
-**1\. Setup & Configuration (dxp\_sdk)**
-----------------------------------------
+------------------------------------------------------------------------
 
-These functions manage your connection to the Iron Mountain DXP environment.
+# 1. Setup & Configuration (dxp_sdk)
 
-**Function**
+  --------------------------------------------------------------------------------------
+  Function                 Usage                           Description
+  ------------------------ ------------------------------- -----------------------------
+  dxp_sdk.init()           dxp_sdk.init()                  Interactive. Run the CLI
+                                                           wizard to set up credentials.
+                                                           (Same as running dxp_sdk init
+                                                           in the terminal).
 
-**Usage**
+  dxp_sdk.configure(...)   configure(access_token="...")   Manual. Manually sets
+                                                           credentials in code (bypasses
+                                                           the saved session file).
+                                                           Useful for serverless/CI
+                                                           environments.
+  --------------------------------------------------------------------------------------
 
-**Description**
+------------------------------------------------------------------------
 
-**dxp\_sdk.init()**
+# 2. Document Operation
 
-dxp\_sdk.init()
-
-**Interactive.** Run the CLI wizard to set up credentials. (Same as running dxp\_sdk init in the terminal).
-
-**dxp\_sdk.configure(...)**
-
-configure(access\_token="...")
-
-**Manual.** Manually sets credentials in code (bypasses the saved session file). Useful for serverless/CI environments.
-
-**2\. Case Operations**
------------------------
-
-### Case.create(metadata, assetSubType)
-
-Creates a new Case (Folder) to group assets together.
-
-*   Behavior: You must explicitly define the assetSubType (usually "Case").
-    
-*   Parameters:
-    
-    *   assetSubType (str): Must be set to "Case" (or your specific case type).
-        
-
-from dxp\_sdk import Case
-
-\# Create a new Case
-
-new\_case = Case.create(
-
-name="SDK\_Example\_case\_03feb\_002",
-
-assetSubType="Case"
-
-)
-
-print(f"Case Created: {case\_res.assetGUID}")
-
-print(case\_res)
-
-**3\. Asset Operations**
-------------------------
-
-These functions work for both uploaded Documents (Assets) and Cases.
-
-### Asset.create(file\_path,assetSubType)
+## Document.create(file_path,assetSubType)
 
 Uploads a physical file to DXP.
 
-*   Behavior: This is designed specifically to trigger ingest workflows in the DXP backend.
-    
-*   Parameters:
-    
-    *   file\_path (str): The absolute path to the file on your local machine.
-        
-    *   assetSubType(str): The subtype of the asset(depends on solution).
-        
+Behavior: This is designed specifically to trigger ingest workflows in
+the DXP backend.
 
-\# Example for document operation.
+Parameters:
 
-from dxp\_sdk import Document
+-   file_path (str): The absolute path to the file on your local
+    machine.
+-   assetSubType(str): The subtype of the asset which will always be
+    "unclassified".
 
-\# Uploads the file and triggers the "Unclassified" workflow
+``` python
+from dxp_sdk import Document
 
-doc = Asset.create(
-
-file\_path="/path/of/the/file.pdf",
-
-assetSubType="Unclassified"
-
+doc = Document.create(
+    file_path="/path/of/the/file.pdf",
+    assetSubType="Unclassified"
 )
 
 print(f"Created Document GUID: {doc.assetGUID}")
-
 print(doc)
+```
 
-### Asset.get(assetGUID)
+------------------------------------------------------------------------
+
+# 3. Case Operations
+
+## Case.create(metadata, assetSubType)
+
+Creates a new Case (Folder) to group assets together.
+
+Behavior: You must explicitly define the assetSubType (usually "Case").
+
+Parameters:
+
+-   assetSubType (str): Must be set to "Case" (or your specific case
+    type).
+
+``` python
+from dxp_sdk import Case
+
+new_case = Case.create(
+    name="SDK_Example_case_03feb_002",
+    assetSubType="Case",
+)
+
+print(f"Case Created: {case_res.assetGUID}")
+print(case_res)
+```
+
+------------------------------------------------------------------------
+
+# 4. Asset Operations
+
+## Asset.get(assetGUID)
 
 Retrieves full information and metadata for a specific Asset or Case.
 
-*   Parameters:
-    
-    *   assetGUID (str): The unique ID of the document or case.
-        
+Parameters:
 
-from dxp\_sdk import Asset
+-   asset_guid (str): The unique ID of the document or case.
 
-\# Get info about a Document or a Case
+``` python
+from dxp_sdk import Asset
 
-asset\_detail = Asset.get(
-
-    assetGUID = "{assetGUID}"
-
+asset_detail = Asset.get(
+    assetGUID = "{assetGUID}"
 )
 
-print(f"Retrieved Asset: {asset\_detail.fileName}")
+print(f"Retrieved Asset: {asset_detail.fileName}")
+print(asset_detail)
+```
 
-print(asset\_detail)
+------------------------------------------------------------------------
 
-### Asset.update(assetGUID, metadata)
+## Asset.update(assetGUID, metadata)
 
 Updates the metadata fields of an existing Asset or Case.
 
-*   Behavior: Use this to modify index fields.
-    
-*   Parameters:
-    
-    *   assetGUID (str): The unique ID of the item to update.
-        
-    *   metadata (dict): Key-value pairs of the fields you want to update.
-        
+Behavior: Use this to modify index fields.
 
-Python
+Parameters:
 
-from dxp\_sdk import Asset
+-   assetGUID (str): The unique ID of the item to update.
+-   metadata (dict): Key-value pairs of the fields you want to update.
 
-\# Update metadata for a Document OR a Case
+``` python
+from dxp_sdk import Asset
 
-update\_res = Asset.update(
-
-    assetGUID = "{assetGUID}", 
-
-\# example assetGUID = "b2d364ad-e73c-4645-xxxx-0f6fs35e5b2d"
-
-    metadata={
-
-"Applicant\_First\_Name": "JOHN DOE"
-
-    }
-
+update_res = Asset.update(
+    assetGUID = "663e2f4f-7933-4cf2-8a9b-071212886d8e",
+    metadata={
+        "Applicant_First_Name": "SDK_Test_Name"
+    }
 )
 
-print(f"Update Status: {update\_res.status}")
+print(f"Update Status: {update_res.status}")
+print(update_res)
+```
 
-print(update\_res)
+------------------------------------------------------------------------
 
-### Asset.search(query)
+## Asset.search(query)
 
 Filters and finds assets within the current Solution.
 
-*   Behavior: Allows you to find assets based on specific criteria within the solution.
-    
-*   Parameters:
-    
-    *   query (dict): The filter criteria (e.g., matching a specific status or name).
-        
+Behavior: Allows you to find assets based on specific criteria within
+the solution.
 
-from dxp\_sdk import Asset
+Parameters:
 
-\# Find all assets that match specific criteria
+-   query (dict): The filter criteria (e.g., matching a specific status
+    or name).
+
+``` python
+from dxp_sdk import Asset
 
 results = Asset.search(
-
-    assetSubType="Driving\_License"
-
-    )
+    assetSubType="Driving_License"
+)
 
 print(f"Found {results.total} assets")
-
 print(results)
+```
 
-### Asset.download(assetGUID, save\_path)
+------------------------------------------------------------------------
+
+## Asset.download(assetGUID, save_path)
 
 Downloads the actual file associated with an asset.
 
-*   Parameters:
-    
-    *   assetGUID (str): The unique ID of the file to download.
-        
-    *   save\_path (str): The local folder path where the file should be saved.
-        
+Parameters:
 
-Python
+-   assetGUID (str): The unique ID of the file to download.
+-   save_path (str): The local folder path where the file should be
+    saved.
 
-from dxp\_sdk import Asset
+``` python
+from dxp_sdk import Asset
 
-\# Download the file to your downloads folder
-
-asset\_download = Asset.download(
-
-assetGUID = "{assetGUID}",
-
-\# example assetGUID="b2d364ad-e73c-4645-xxxx-0f6f037e5b2d",
-
-\# local system path to save the document
-
-save\_path="/path/to/save/asset/document.pdf" 
-
+asset_download = Asset.download(
+    assetGUID="b2d364ad-e73c-4645-b7e7-0f6f037e5b2d",
+    save_path="/path/to/save/asset/document.pdf"
 )
 
-print(asset\_download)
+print(asset_download)
+```
 
-**CLI Reference**
------------------
+------------------------------------------------------------------------
 
-The SDK comes with a command-line tool dxp\_sdk.
+# CLI Reference
 
-**Command**
+  -----------------------------------------------------------------------
+  Command                          Description
+  -------------------------------- --------------------------------------
+  dxp_sdk init                     Starts the interactive setup wizard.
+                                   Saves credentials to
+                                   \~/.dxp_sdk/session.json.
 
-**Description**
+  dxp_sdk status                   Checks if a valid session exists and
+                                   displays the current configuration.
 
-dxp\_sdk init
+  dxp_sdk --help                   Shows available commands and usage
+                                   instructions.
+  -----------------------------------------------------------------------
 
-Starts the interactive setup wizard. Saves credentials to ~/.dxp\_sdk/session.json.
+------------------------------------------------------------------------
 
-dxp\_sdk status
+# Project Structure
 
-Checks if a valid session exists and displays the current configuration.
+    dxp_sdk/
+    ├── pyproject.toml
+    ├── requirements.txt
+    ├── README.md
+    │
+    └── dxp_sdk/
+        ├── __init__.py
+        ├── authorization/
+        │   ├── auth.py
+        │   └── session.py
+        ├── cli/
+        │   └── cli.py
+        ├── client/
+        │   └── dxp_client.py
+        ├── config/
+        │   └── config.py
+        ├── http/
+        │   └── http_client.py
+        ├── models/
+        │   ├── dxp_object.py
+        │   └── request.py
+        └── resources/
+            ├── base.py
+            ├── asset.py
+            ├── case.py
+            └── document.py
 
-dxp\_sdk --help
+------------------------------------------------------------------------
 
-Shows available commands and usage instructions.
+# ❓ Troubleshooting
 
-**Project Structure**
----------------------
+Q: ModuleNotFoundError: No module named 'dxp_sdk'\
+Fix: Ensure you are running the script with the same Python version you
+installed the library in.
 
-For developers contributing to the SDK, here is how the code is organized:
+``` bash
+python3 -m dxp_sdk.cli init
+```
 
-dxp\_sdk/# Root Directory
+Q: dxp_sdk: command not found\
+Fix: Your Python bin folder is not in your system PATH.
 
-├── pyproject.toml# Build configuration & Dependencies
+``` bash
+python3 -m dxp_sdk.cli init
+```
 
-├── requirements.txt# Python dependencies list
-
-├── [README.md](http://readme.md/)\# This documentation
-
-│
-
-└── dxp\_sdk/# Source Code Package
-
-    ├── \_\_init\_\_.py# Handles "Auto-Load" logic (Magic Import)
-
-    │
-
-    ├── authorization/# Authentication Logic
-
-    │   ├── auth.py# Logic for 'init()' interactive flow
-
-    │   └── session.py# Handles reading/writing JSON credentials to disk
-
-    │
-
-    ├── cli/# Command Line Interface
-
-    │   └── cli.py# Entry point for the 'dxp\_sdk' terminal command
-
-    │
-
-    ├── client/# High-Level Client
-
-    │   └── dxp\_client.py# Orchestrates SDK configuration & startup
-
-    │
-
-    ├── config/# Configuration Management
-
-    │   └── config.py# Singleton class storing settings in memory
-
-    │
-
-    ├── http/# Low-Level Networking
-
-    │   └── http\_client.py# Wrapper for 'requests' (POST)
-
-    │
-
-    ├── models/# Data Models & Schemas
-
-    │   ├── dxp\_object.py# Base class for DXP objects
-
-    │   └── request.py# Request payload definitions
-
-    │
-
-    └── resources/# API Resource Wrappers (Business Logic)
-
-        ├── base.py# Shared logic for all resources (CRUD bases)
-
-        ├── asset.py# Operations for Assets
-
-        ├── case.py# Operations for Cases
-
-        └── document.py# Operations for Documents
-
-**❓ Troubleshooting**
----------------------
-
-**Q: ModuleNotFoundError: No module named 'dxp\_sdk'**
-
-*   **Fix:** Ensure you are running the script with the same Python version you installed the library in. Try running this to verify.
-    
-
-python3 -m dxp\_sdk.cli init
-
-**Q: dxp\_sdk: command not found**
-
-*   **Fix:** Your Python bin folder is not in your system PATH.
-    
-*   **Workaround:** You can always run the CLI using Python directly:
-    
-
-python3 -m dxp\_sdk.cli init
-
-**Q: Authorization Errors (401/403)**
-
-*   **Fix:** Your token might have expired. Simply run dxp\_sdk init again to paste a new token. The SDK will overwrite the old session file.
+Q: Authorization Errors (401/403)\
+Fix: Your token might have expired. Simply run dxp_sdk init again to
+paste a new token.

@@ -303,7 +303,7 @@ print(asset_download)
         └── resources/          # API Resource Wrappers (Business Logic)
             ├── base.py         # Shared logic for all resources (CRUD bases)
             ├── asset.py        # Operations for Assets
-            ├── case.py         # Operations for Cases
+            └── case.py         # Operations for Cases
 
 ------------------------------------------------------------------------
 

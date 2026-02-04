@@ -259,19 +259,14 @@ print(asset_download)
 
 # CLI Reference
 
-  -----------------------------------------------------------------------
-  Command                          Description
-  -------------------------------- --------------------------------------
-  dxp_sdk init                     Starts the interactive setup wizard.
-                                   Saves credentials to
-                                   \~/.dxp_sdk/session.json.
-
-  dxp_sdk status                   Checks if a valid session exists and
-                                   displays the current configuration.
-
-  dxp_sdk --help                   Shows available commands and usage
-                                   instructions.
-  -----------------------------------------------------------------------
+  
++----------------+------------------------------------------------------------------------------------+
+|    Command     |                                    Description                                     |
++----------------+------------------------------------------------------------------------------------+
+| dxp_sdk init   | Starts the interactive setup wizard.Saves credentials to \~/.dxp_sdk/session.json. |
+| dxp_sdk status | Checks if a valid session exists and displays the current configuration.           |
+| dxp_sdk --help | Shows available commands and usage instructions.                                   |
++----------------+------------------------------------------------------------------------------------+
 
 ------------------------------------------------------------------------
 
